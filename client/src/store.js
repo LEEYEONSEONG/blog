@@ -8,12 +8,12 @@ import rootSaga from './redux/sagas';
 
 export const history = createBrowserHistory();
 
-const sagaMiddleware = createBrowserHistory();
+const sagaMiddleware = createSagaMiddleware();
 
 const initialState = {};
 
 const middlewares = [sagaMiddleware, routerMiddleware(history)];
-const devtools = Window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
+const devtools = window.__REDUX_DEVTOOLS_EXTENSIONS_COMPOSE__;
 
 const composeEnhancer =
   process.env.NODE_ENV === 'production' ? compose : devtools || compose;
@@ -23,7 +23,6 @@ const store = createStore(
   initialState,
   composeEnhancer(applyMiddleware(...middlewares))
 );
-
 sagaMiddleware.run(rootSaga);
 
 export default store;
